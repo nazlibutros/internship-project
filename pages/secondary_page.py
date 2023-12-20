@@ -14,7 +14,6 @@ class SecondaryPage(Page):
     FILTER_PRICE_TO = (By.CSS_SELECTOR, "[wized = 'unitPriceToFilter']")
     PRODUCT_PRICES = (By.CSS_SELECTOR, "[class ='number-price-text']")
 
-
     def verify_secondary_page_opened(self):
         wait = WebDriverWait(self.driver, 10)
         wait.until(EC.url_contains("https://soft.reelly.io/secondary-listings"))

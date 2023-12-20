@@ -15,3 +15,4 @@ class Application:
         self.signin_page = SigninPage(driver)
         self.secondary_page = SecondaryPage(driver)
 
+

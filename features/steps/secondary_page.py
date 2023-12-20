@@ -31,3 +31,4 @@ def click_apply_filter(context):
 def verify_prices_in_range(context, min_price, max_price):
     sleep(5)
     context.app.secondary_page.verify_prices_in_range(min_price, max_price)
+

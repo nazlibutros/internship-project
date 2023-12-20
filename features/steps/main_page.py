@@ -11,3 +11,4 @@ def verify_main_page_opened(context):
 def click_secondary(context):
     context.app.main_page.click_secondary_option()
     sleep(5)
+

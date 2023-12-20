@@ -9,3 +9,4 @@ class Page:
 
     def open_url(self, url):
         self.driver.get(url)
+

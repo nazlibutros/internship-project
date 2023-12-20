@@ -19,3 +19,4 @@ class SigninPage(Page):
 
     def click_continue(self):
         self.driver.find_element(*self.CONTINUE_BUTTON).click()
+

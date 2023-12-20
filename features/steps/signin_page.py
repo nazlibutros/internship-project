@@ -15,3 +15,4 @@ def input_credentials(context, email, password):
 @when('Click on Continue')
 def click_continue(context):
     context.app.signin_page.click_continue()
+
