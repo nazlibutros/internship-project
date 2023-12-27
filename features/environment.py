@@ -1,20 +1,24 @@
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.support.wait import WebDriverWait
 from app.application import Application
 
 
-def browser_init(context):
+def browser_init(context,scenario_name):
     """
+    :param scenario_name: 
     :param context: Behave context
     """
+    # ### CHROME ####
     # driver_path = ChromeDriverManager().install()
     # service = Service(driver_path)
     # context.driver = webdriver.Chrome(service=service)
 
     # ### FIREFOX ####
-    service = Service(executable_path='/Users/rtbut/OneDrive/Desktop/internship/geckodriver.exe')
-    context.driver = webdriver.Firefox(service=service)
+    # service = Service(executable_path='/Users/rtbut/OneDrive/Desktop/internship/geckodriver.exe')
+    # context.driver = webdriver.Firefox(service=service)
 
     # ### HEADLESS MODE ####
     # options = webdriver.ChromeOptions()
@@ -26,14 +30,34 @@ def browser_init(context):
     # )
 
     # context.driver.maximize_window()
-    context.driver.set_window_size(1280, 720)
+
+    ### BROWSERSTACK ###
+    # Register for BrowserStack, then grab it from https://www.browserstack.com/accounts/settings
+    bs_user = 'ali_59vutx'
+    bs_key = '6qH4Am5Hk9nsG7qU9PCv'
+    url = f'https://{bs_user}:{bs_key}@hub-cloud.browserstack.com/wd/hub'
+    # kevincribman_n1FUEc
+    # fyKSJSXt7QN13oznAzWz
+    options = Options()
+    bstack_options = {
+        'os': 'Windows',
+        'osVersion': '10',
+        'browserName': 'Firefox',
+        'sessionName': scenario_name
+    }
+    options.set_capability('bstack:options', bstack_options)
+    context.driver = webdriver.Remote(command_executor=url, options=options)
+
+    context.driver.maximize_window()
+    ## use it with reely firefox test, maximize window not working ##
+    # context.driver.set_window_size(1280, 720)
     context.driver.implicitly_wait(4)
     context.app = Application(context.driver)
 
 
 def before_scenario(context, scenario):
     print('\nStarted scenario: ', scenario.name)
-    browser_init(context)
+    browser_init(context, scenario.name)
 
 
 def before_step(context, step):
