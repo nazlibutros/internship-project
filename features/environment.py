@@ -42,8 +42,12 @@ def browser_init(context,scenario_name):
     bstack_options = {
         'os': 'Windows',
         'osVersion': '10',
-        'browserName': 'Firefox',
+        'browserName': 'Chrome',
         'sessionName': scenario_name
+        # 'os': 'OS X',
+        # 'osVersion': 'Big Sur',  # Adjust to the macOS version you are using
+        # 'browserName': 'Chrome',
+        # 'sessionName': scenario_name
     }
     options.set_capability('bstack:options', bstack_options)
     context.driver = webdriver.Remote(command_executor=url, options=options)
